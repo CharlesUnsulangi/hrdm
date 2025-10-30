@@ -1,3 +1,128 @@
+### Struktur Tabel: tr_hr_pelamar_account
+
+| Kolom            | Tipe Data   | Keterangan / Aturan                      |
+|------------------|-------------|------------------------------------------|
+| tr_hr_pelamar_id | varchar(50) | PRIMARY KEY, NOT NULL (relasi ke pelamar)|
+| bank_acc         | varchar(50) |                                          |
+| ktp              | varchar(50) |                                          |
+| ms_bank_id       | varchar(50) | (relasi ke master bank)                  |
+
+**Catatan:**
+- Menyimpan data rekening bank dan KTP pelamar.
+- Kolom `ms_bank_id` untuk relasi ke tabel master bank.
+### Struktur Tabel: mr_hr_status_pelamar
+
+| Kolom                   | Tipe Data   | Keterangan / Aturan         |
+|-------------------------|-------------|-----------------------------|
+| ms_hr_status_pelamar_id | varchar(50) | PRIMARY KEY, NOT NULL       |
+
+**Catatan:**
+- Tabel master status pelamar, digunakan untuk referensi status proses rekrutmen.
+### Struktur Tabel: tr_hr_pelamar_sosmed
+
+| Kolom                | Tipe Data        | Keterangan / Aturan                      |
+|----------------------|------------------|------------------------------------------|
+| tr_hr_pelamar_sosmed | int              | PRIMARY KEY, NOT NULL                    |
+| sosmed_link          | nvarchar(max)    |                                          |
+| tr_hr_pelamar_id     | varchar(50)      | (relasi ke pelamar)                      |
+| sosmed_user          | varchar(50)      |                                          |
+| sosmed_type          | varchar(50)      |                                          |
+| date_created         | date             |                                          |
+| user_created         | varchar(50)      |                                          |
+
+**Catatan:**
+- Setiap record sosial media pelamar terhubung ke pelamar melalui kolom `tr_hr_pelamar_id`.
+- Kolom `sosmed_type` untuk jenis platform (misal: Facebook, Instagram, dll).
+### Struktur Tabel: tr_hr_pelamar_skedul
+
+| Kolom                | Tipe Data   | Keterangan / Aturan                      |
+|----------------------|-------------|------------------------------------------|
+| tr_hr_pelamar_id     | varchar(50) | PRIMARY KEY, NOT NULL (relasi ke pelamar)|
+| skedul_pelamar_time  | datetime    |                                          |
+| skedul_confirmed     | datetime    |                                          |
+
+**Catatan:**
+- Setiap record skedul terhubung ke pelamar melalui kolom `tr_hr_pelamar_id`.
+- Menyimpan waktu jadwal interview dan waktu konfirmasi kehadiran.
+### Struktur Tabel: tr_hr_pelamar_personal
+
+| Kolom             | Tipe Data    | Keterangan / Aturan         |
+|-------------------|--------------|-----------------------------|
+| tr_hr_pelamar_id  | varchar(50)  | PRIMARY KEY, NOT NULL (relasi ke pelamar) |
+| date_lahir        | date         |                             |
+| kota_lahir        | varchar(50)  |                             |
+| alamat            | varchar(50)  |                             |
+| jenis             | varchar(50)  |                             |
+| agama             | varchar(50)  |                             |
+| nama              | varchar(50)  |                             |
+| pendidikan        | varchar(50)  |                             |
+| cek_pengalaman    | bit          |                             |
+
+**Catatan:**
+- Setiap record personal terhubung ke pelamar melalui kolom `tr_hr_pelamar_id`.
+- Kolom `cek_pengalaman` bertipe bit (boolean) untuk menandai apakah pelamar memiliki pengalaman kerja.
+### Struktur Tabel: tr_hr_pelamar_pengalaman_perusahaan
+
+| Kolom                     | Tipe Data      | Keterangan / Aturan         |
+|---------------------------|----------------|-----------------------------|
+| tr_hr_pelamar_pengalaman_id| int (IDENTITY) | PRIMARY KEY, NOT NULL       |
+| tr_hr_pelamar_id          | varchar(50)    | NOT NULL (relasi ke pelamar) |
+| perusahaan                | varchar(50)    | NOT NULL                    |
+| tgl_start                 | date           | NOT NULL                    |
+| tgl_end                   | date           | NOT NULL                    |
+| hp_hrd                    | varchar(50)    | NOT NULL                    |
+| nama_hrd                  | varchar(50)    | NOT NULL                    |
+| hp_atasan                 | varchar(50)    | NOT NULL                    |
+| alasan_resign             | text           | NOT NULL                    |
+| jabatan_akhir             | varchar(50)    |                             |
+| jabatan_awal              | varchar(50)    |                             |
+| gaji_awal                 | money          | NOT NULL                    |
+| gaji_akhir                | money          | NOT NULL                    |
+| sukses_rating             | int            |                             |
+| sukses_keterangan         | text           |                             |
+| sulit_rating              | int            |                             |
+| sulit_keterangan          | text           |                             |
+| puas_rating               | int            |                             |
+| puas_keterangan           | text           |                             |
+| masalah_rating            | int            |                             |
+| masalah_keterangan        | text           |                             |
+| kesalahan_paling_besar    | text           |                             |
+
+**Catatan:**
+- Setiap record pengalaman kerja terhubung ke pelamar melalui kolom `tr_hr_pelamar_id`.
+- Kolom ID utama auto increment (IDENTITY).
+- Terdapat kolom rating dan keterangan untuk penilaian pengalaman kerja.
+### Struktur Tabel: tr_hr_pelamar_main
+
+| Kolom             | Tipe Data           | Keterangan / Aturan         |
+|-------------------|---------------------|-----------------------------|
+| tr_hr_pelamar_id  | varchar(50)         | PRIMARY KEY, NOT NULL       |
+| nama              | varchar(50)         | NOT NULL                    |
+| email             | varchar(50)         | NOT NULL                    |
+| hp                | varchar(50)         | NOT NULL                    |
+| posisi            | varchar(50)         | NOT NULL                    |
+| user_created      | varchar(50)         |                             |
+| date_created      | date                |                             |
+| rating            | int                 |                             |
+| cek_confirm       | bit                 | NOT NULL, DEFAULT 0         |
+| time_confirm      | datetimeoffset(7)   |                             |
+| cek_cv            | bit                 | NOT NULL, DEFAULT 0         |
+| cek_driver        | bit                 | NOT NULL, DEFAULT 0         |
+| cek_interview     | bit                 | NOT NULL, DEFAULT 0         |
+| cek_kandidat      | bit                 | NOT NULL, DEFAULT 0         |
+| cek_priority      | bit                 | NOT NULL, DEFAULT 0         |
+| cek_tolak         | bit                 | NOT NULL, DEFAULT 0         |
+| cek_wa            | bit                 | NOT NULL, DEFAULT 0         |
+| time_cv           | datetimeoffset(7)   |                             |
+| time_interview    | datetimeoffset(7)   |                             |
+| time_wa           | datetimeoffset(7)   |                             |
+| link_cv           | nvarchar(250)       |                             |
+
+**Catatan:**
+- Semua kolom cek_* bertipe bit (boolean) dan default 0 (false).
+- Primary key: `tr_hr_pelamar_id`.
+- Kolom waktu menggunakan tipe `datetimeoffset(7)` untuk presisi waktu.
+- Kolom `link_cv` untuk menyimpan URL/link file CV.
 ## Konsep Keseluruhan Aplikasi HRDM
 
 ### 1. Alur Utama Pengguna (User Flow)
