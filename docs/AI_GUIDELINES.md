@@ -1,3 +1,40 @@
+# Flow: Melengkapi Data Diri Pelamar Tanpa Login
+
+1. **Pelamar mengisi form awal**
+    - Input: Email dan nomor HP.
+    - Validasi: Cek format email & HP, pastikan belum pernah digunakan (atau handle duplikasi sesuai kebijakan).
+
+2. **Sistem menyimpan data awal**
+    - Buat record pelamar baru (status: draft/belum lengkap).
+    - Generate token unik (misal UUID atau signed token) untuk akses selanjutnya.
+
+3. **Sistem mengirim link akses**
+    - Kirim link berisi token ke email dan/atau WhatsApp pelamar.
+    - Contoh link: `https://hrdm.example.com/isi-data?token=xxxx`
+
+4. **Pelamar melengkapi data**
+    - Pelamar klik link, akses form lanjutan tanpa login/password.
+    - Token diverifikasi, jika valid tampilkan form data diri lengkap.
+    - Setelah submit, data pelamar diupdate (status: lengkap/siap proses).
+
+5. **(Opsional) Akses ulang**
+    - Jika pelamar ingin mengedit data, gunakan link/token yang sama.
+    - Untuk keamanan, token bisa diatur expired atau hanya bisa digunakan sekali.
+
+**Keamanan & Catatan:**
+- Token harus cukup panjang dan acak (gunakan UUID atau signed token Laravel).
+- Token sebaiknya expired dalam waktu tertentu (misal 24 jam) atau setelah data lengkap.
+- Jika ingin login di masa depan, pelamar bisa diminta membuat password setelah data lengkap.
+
+**Keuntungan:**
+- Proses lebih cepat, user experience lebih baik.
+- Mengurangi hambatan awal bagi pelamar.
+
+**Risiko:**
+- Perlu validasi email/HP agar data tidak ganda/palsu.
+- Perlu mekanisme pengiriman link/token yang andal.
+
+---
 ### Struktur Tabel: tr_hr_pelamar_account
 
 | Kolom            | Tipe Data   | Aturan/Relasi                      | Deskripsi |
