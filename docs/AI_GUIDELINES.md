@@ -1,3 +1,114 @@
+## Konsep Keseluruhan Aplikasi HRDM
+
+### 1. Alur Utama Pengguna (User Flow)
+- Registrasi Akun: Pelamar membuat akun baru.
+- Login: Pelamar masuk ke aplikasi.
+- Pengisian Profil: Pelamar mengisi data diri lengkap, memilih posisi yang dilamar (Driver, Mitra Kenek, Staff).
+- Pengisian Pengalaman Kerja & Sosial Media: Pelamar menambah/edit pengalaman kerja dan link sosial media.
+- Upload Dokumen: Pelamar mengunggah dokumen pendukung (CV, KTP, foto, dll).
+- Konfirmasi Undangan Interview: Jika diundang, pelamar konfirmasi kehadiran interview.
+- Pengisian Pertanyaan Interview: Pelamar mengisi form pertanyaan interview sebelum/saat interview.
+- Check-in Interview (QR): Pelamar scan QR code saat hadir interview di lokasi.
+- Dashboard Pelamar: Melihat status pendaftaran, notifikasi, dan menu lain.
+- Dashboard Admin/HR: Melihat data pelamar, status proses, dan administrasi.
+
+### 2. Daftar Halaman & Formulir
+
+1. RegisterForm — Form pendaftaran akun baru.
+2. ApplicantProfileForm — Form data diri lengkap & posisi yang dilamar.
+3. WorkExperienceForm — Form pengalaman kerja.
+4. SocialMediaForm — Form sosial media.
+5. DocumentUploadForm — Form upload dokumen.
+6. InterviewConfirmationForm — Form konfirmasi undangan interview.
+7. InterviewCheckinForm — Form scan QR code saat check-in interview.
+8. InterviewQuestionnaireForm — Form isian pertanyaan interview.
+
+### 3. Struktur Database (Contoh Tabel Utama)
+- users — Data akun pelamar.
+- profiles — Data profil pelamar (relasi ke users).
+- work_experiences — Pengalaman kerja (relasi ke profiles).
+- social_media_links — Link sosial media (relasi ke profiles).
+- documents — Dokumen upload (relasi ke profiles).
+- interview_invitations — Data undangan interview (relasi ke profiles).
+- interview_answers — Jawaban pertanyaan interview (relasi ke profiles).
+- roles — Role user (pelamar, admin/HR).
+
+### 4. Hak Akses & Role
+- Pelamar: Akses form pendaftaran, profil, pengalaman kerja, sosial media, dokumen, konfirmasi interview, isian pertanyaan, check-in QR.
+- Admin/HR: Akses dashboard admin, detail pelamar, kelola proses rekrutmen.
+
+### 5. Validasi & Aturan Bisnis
+- KTP & nomor HP unik.
+- Email valid & unik.
+- File upload maksimal 2MB.
+- Pelamar hanya bisa apply satu posisi dalam satu waktu.
+- Hanya pelamar yang sudah melengkapi profil yang bisa lanjut ke tahap interview.
+
+### 6. Notifikasi & Feedback
+- Email konfirmasi pendaftaran.
+- Alert sukses/gagal di setiap form.
+- Notifikasi undangan interview.
+## Daftar Formulir & Penamaan
+
+Berikut adalah daftar form utama untuk pelamar beserta rencana penamaan form yang konsisten dan jelas:
+
+### 1. Formulir Pendaftaran Akun
+- **Penamaan:** `RegisterForm`
+- **Fungsi:** Form untuk membuat akun baru (email, password, dsb).
+
+### 2. Formulir Profil Pelamar
+- **Penamaan:** `ApplicantProfileForm`
+- **Fungsi:** Form utama untuk mengisi data diri lengkap, termasuk:
+    - Nama lengkap
+    - Nomor KTP
+    - Tempat & tanggal lahir
+    - Jenis kelamin
+    - Agama
+    - Status pernikahan
+    - Alamat KTP & domisili
+    - Nomor HP
+    - Gaji diharapkan
+    - Bersedia ditempatkan di luar kota (ya/tidak)
+    - **Posisi yang dilamar** (dropdown: Driver, Mitra Kenek, Staff)
+
+### 3. Formulir Pengalaman Kerja
+- **Penamaan:** `WorkExperienceForm`
+- **Fungsi:** Form untuk menambah/edit pengalaman kerja:
+    - Nama perusahaan
+    - Posisi terakhir
+    - Gaji terakhir
+    - Tahun mulai & selesai
+
+### 4. Formulir Sosial Media
+- **Penamaan:** `SocialMediaForm`
+- **Fungsi:** Form untuk menambah/edit link sosial media:
+    - Nama platform (misal: Facebook, Instagram)
+    - Link URL
+
+### 5. Formulir Upload Dokumen
+- **Penamaan:** `DocumentUploadForm`
+- **Fungsi:** Form untuk upload file:
+    - CV
+    - KTP
+    - Foto
+    - Dokumen pendukung lain
+
+### 6. Formulir Konfirmasi Undangan Interview
+- **Penamaan:** `InterviewConfirmationForm`
+- **Fungsi:** Form untuk konfirmasi kehadiran interview (ya/tidak, catatan tambahan).
+
+
+### 7. Formulir Check-in Interview (QR)
+- **Penamaan:** `InterviewCheckinForm`
+- **Fungsi:** Form/halaman untuk scan QR code saat hadir interview.
+
+### 8. Formulir Pertanyaan Interview
+- **Penamaan:** `InterviewQuestionnaireForm`
+- **Fungsi:** Form untuk mengisi daftar pertanyaan interview yang wajib dijawab pelamar sebelum/saat proses interview.
+
+**Catatan:**
+- Semua pelamar (Driver, Mitra Kenek, Staff) menggunakan form yang sama, hanya pilihan "Posisi yang Dilamar" yang membedakan.
+- Penamaan form mengikuti pola PascalCase dan jelas sesuai fungsinya.
 # AI Safety Guidelines for Project Development
 
 This document outlines the mandatory safety and quality guidelines that must be followed by the AI assistant during the development of this project. Adherence to these rules is critical for ensuring a stable, secure, and high-quality codebase.
