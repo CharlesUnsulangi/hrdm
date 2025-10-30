@@ -119,10 +119,9 @@
 | link_cv           | nvarchar(250)       |                             |
 
 **Catatan:**
-- Semua kolom cek_* bertipe bit (boolean) dan default 0 (false).
-- Primary key: `tr_hr_pelamar_id`.
-- Kolom waktu menggunakan tipe `datetimeoffset(7)` untuk presisi waktu.
-- Kolom `link_cv` untuk menyimpan URL/link file CV.
+- Kolom `rating` diisi oleh user (admin HRD) dalam bentuk radio angka 1-5, untuk menilai potensi pelamar.
+- Kolom `cek_driver` menandakan apakah pelamar ini driver atau bukan (1=driver, 0=bukan).
+- Kolom `cek_wa` menandakan apakah pelamar sudah dihubungi via WhatsApp (1=sudah, 0=belum).
 ## Konsep Keseluruhan Aplikasi HRDM
 
 ### 1. Alur Utama Pengguna (User Flow)
